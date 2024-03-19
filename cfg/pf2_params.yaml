@@ -1,0 +1,78 @@
+# viz: 1                    # Viz is defined in the toplevel launchfile, defaults to false
+max_viz_particles: 50       # If viz = 1, how many particles to visualise.
+max_particles: 3000         # Num particles in PF. Suitable vals: <=3000
+des_lidar_beams: 21         # Num lidar beams to evaluate
+squash_factor: 2.2          # Probability value for sensor model
+max_range: 20               # Maximum rangefinder distance
+theta_discretization: 150   # The number of discrete angular values in the LUT
+
+# Rangelib variants.
+# `2` evaluates the sensor model and the likelihoods separately, `3` does it one pass.
+# However `2` is not supported for "rmgpu".
+# Try variants: (rmgpu,2), (pcddt,3),(glt,3)
+range_method: glt
+rangelib_variant: 3
+# range_method: rmgpu
+# rangelib_variant: 2
+# range_method: pcddt
+# rangelib_variant: 3
+
+# These topics are defined in the toplevel launchfile
+# pose_pub_topic: /tracked_pose
+# scan_topic: /scan
+# odometry_topic: $(arg odom_topic)
+
+# When initializing from a given point, give the covariance
+initial_var_x: 0.5
+initial_var_y: 0.5
+initial_var_theta: 0.4
+# Used to specify the initial pose
+initial_pose_x: 0.0
+initial_pose_y: 0.0
+initial_pose_theta: 0.0
+
+# Probabilities for the different laser hit modalities. Should sum to 1
+# Perhaps these could be tuned for TT vs H2H
+# as H2H would give a higher chance of an unexpected short reading.
+z_hit: 0.85     # Probability we hit intended target
+z_short: 0.10   # Unexpected short reading
+z_max: 0.025    # out-of-range reading beyond `max_range`
+z_rand: 0.025   # a reading anywhere in the valid range (uniformly distributed)
+
+sigma_hit: 0.1          # std dev (m) of hit
+lambda_short: 0.25      # parameter of short-reading exponential distribution
+
+# Choose bewteen "tum", "amcl", "arc", "default"
+motion_model: tum
+
+# Motion model params for "tum" -- TUM-improved diff-drive motion model
+alpha_1_tum: 0.5      # How rotation affects rotation variance
+alpha_2_tum: 0.015    # How translation affects rotation variance
+alpha_3_tum: 1.0      # How translation affects translation variance
+alpha_4_tum: 0.1      # How rotation affects translation variance
+lam_thresh: 0.1       # Minimum translation between frames for the TUM model to become effective
+
+# Motion model params for "amcl" -- default diff-drive motion model from AMCL ros package
+alpha_1_amcl: 0.5     # How rotation affects rotation variance
+alpha_2_amcl: 0.5     # How translation affects rotation variance
+alpha_3_amcl: 1.0     # How translation affects translation variance
+alpha_4_amcl: 0.1     # How rotation affects translation variance
+
+# Motion model params for "arc" -- modified kinematic bicycle model
+motion_dispersion_arc_x: 0.8            # how change in x affects x noise
+motion_dispersion_arc_y: 1.0            # how change in y affects y noise
+motion_dispersion_arc_theta: 0.75       # how change in theta affects theta noise
+motion_dispersion_arc_xy: 1.0           # how change in x affects y noise
+motion_dispersion_arc_x_min: 0.01       # min noise in x
+motion_dispersion_arc_y_min: 0.03       # min noise in y
+motion_dispersion_arc_y_max: 1.0        # max noise in y
+motion_dispersion_arc_theta_min: 0.01   # min noise in theta
+motion_dispersion_arc_xy_min_x: 0.10    # min delta_x before it affects y scaling
+
+# Motion model params for "default" -- MIT PF motion model
+motion_dispersion_x: 0.05
+motion_dispersion_y: 0.025
+motion_dispersion_theta: 0.25
+
+# boxed lidar aspect ratio
+lidar_aspect_ratio: 3.5

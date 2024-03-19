@@ -1,0 +1,35 @@
+src/__pycache__/**
+src/utils/__pycache__/**
+**.pyc
+
+# rosbags 
+*.bag
+bags/
+
+# JSON files for waypoints
+*/maps/*/*.json
+# but not the test ones
+!*/maps/test_map/*.json
+
+# vscode
+.vscode/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/*
+
+# packages 
+*.egg-info
+
+# other dataz
+system_identification/steering_delay/processed/*.csv

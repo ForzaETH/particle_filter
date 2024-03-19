@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package>
+  <name>particle_filter</name>
+  <version>0.1.0</version>
+  <description>Particle Filter Localization using RangeLibc for accelerated ray casting.</description>
+
+  <!-- One maintainer tag required, multiple allowed, one person per tag -->
+  <maintainer email="tialim@student.ethz.ch">Tianyi Lim</maintainer>
+  <author email="tialim@student.ethz.ch">Tianyi Lim</author>
+
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <license>MIT</license>
+
+  <url type="website">https://arxiv.org/abs/2401.07658</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>message_runtime</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>map_server</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>map_server</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+
+</package>

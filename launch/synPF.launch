@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="debug" default="false"/>
+  <arg name="viz" default="false"/>
+  <arg name="pose_pub_topic" default="/tracked_pose"/>
+  <arg name="scan_topic" default="/scan"/>
+  <arg name="odometry_topic" default="/state_estimation/odom"/>
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_theta" default="0.0"/>
+  <arg name="publish_tf" default="True"/>
+  <arg name="pub_covariance" default="False" />
+  <arg name="publish_pose" default="True"/>
+  <arg name="publish_odom" default="False"/>
+
+  <node pkg="particle_filter" type="synPF.py" name="particle_filter2" output="screen">
+    <rosparam file="$(find particle_filter)/cfg/pf2_params.yaml" />
+    <param name="debug" value="$(arg debug)" />
+    <param name="viz" value="$(arg viz)" />
+    <param name="pose_pub_topic" value="$(arg pose_pub_topic)" />
+    <param name="scan_topic" value="$(arg scan_topic)" />
+    <param name="odometry_topic" value="$(arg odometry_topic)" />
+    <param name="initial_pose_x" value="$(arg initial_pose_x)" />
+    <param name="initial_pose_y" value="$(arg initial_pose_y)" />
+    <param name="initial_pose_theta" value="$(arg initial_pose_theta)" />
+    <param name="publish_tf" value="$(arg publish_tf)" />
+    <param name="pub_covariance" value="$(arg pub_covariance)" />
+    <param name="publish_pose" value="$(arg publish_pose)"/>
+    <param name="publish_odom" value="$(arg publish_odom)"/>
+  </node>
+
+  <!-- Enable this at your own risk. It is far better to tune PF2 parameters on a bag. -->
+  <!-- <node pkg="particle_filter" type="dynamic_pf_server.py" name="dynamic_pf2_tuner_node" output="screen" /> -->
+</launch>
